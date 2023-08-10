@@ -1,4 +1,4 @@
-const openai = require("../openai/openai");
+const openai = require("openai");
 const { extractPDFData, extractWebData } = require("./dataUtils");
 const Data = require("../models/Data");
 const axios = require("axios");
@@ -8,7 +8,7 @@ async function askQuestion(req, res) {
     const userQuestion = req.body.question;
 
     const response = await axios.post(
-      "https://api.openai.com/v1/engines/davinci-codex/completions",
+      "https://api.openai.com/v1/models",
       {
         prompt: userQuestion,
         max_tokens: 50,
@@ -16,7 +16,7 @@ async function askQuestion(req, res) {
       {
         headers: {
           "Content-Type": "application/json",
-          Authorization: "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",
+          "Authorization": "Bearer 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",
         },
       }
     );
