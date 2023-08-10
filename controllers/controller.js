@@ -1,4 +1,4 @@
-const Data = require("../models/Data");
+const Users = require("../models/Data");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 
@@ -10,7 +10,7 @@ async function signUp(req, res) {
 
     // Hash the password before saving it to the database
     const hashedPassword = await bcrypt.hash(password, 10);
-    const newUser = await Data.create({
+    const newUser = await Users.create({
       full_name: full_name,
       email: email,
       phone_no: phone_no,
@@ -27,7 +27,7 @@ async function signUp(req, res) {
 async function login(req, res) {
   try {
     const { email, password } = req.body;
-    const user = await Data.findOne({ where: { email: email } });
+    const user = await Users.findOne({ where: { email: email } });
 
     if (!user) {
       return res.status(401).json({ error: "User not found" });
@@ -52,7 +52,7 @@ async function login(req, res) {
 async function updatePassword(req, res) {
   try {
     const { email, oldPassword, newPassword } = req.body;
-    const user = await Data.findOne({ where: { email: email } });
+    const user = await Users.findOne({ where: { email: email } });
 
     if (!user) {
       return res.status(404).json({ error: "User not found" });
@@ -76,7 +76,7 @@ async function updatePassword(req, res) {
 async function deleteUser(req, res) {
   try {
     const { email } = req.body;
-    const user = await Data.findOne({ where: { email: email } });
+    const user = await Users.findOne({ where: { email: email } });
 
     if (!user) {
       return res.status(404).json({ error: "User not found" });
