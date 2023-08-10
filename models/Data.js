@@ -1,38 +1,36 @@
 const sequelize = require("../utils/db");
 const { DataTypes } = require("sequelize");
 
-const Data = sequelize.define(
-  "Data",
+const Users = sequelize.define(
+  "Users",
   {
     id: {
       type: DataTypes.INTEGER,
       primaryKey: true,
       autoIncrement: true,
     },
-    sourceType: {
+    full_name: {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    sourceContent: {
+    email: {
       type: DataTypes.TEXT,
       allowNull: false,
+      unique: true,
     },
-    extractedText: {
+    phone_no: {
       type: DataTypes.TEXT,
       allowNull: true,
-    },
-    questionsAsked: {
+    }
+    ,
+    password: {
       type: DataTypes.TEXT,
       allowNull: true,
-    },
-    responses: {
-      type: DataTypes.TEXT,
-      allowNull: true,
-    },
+    }
   },
   {
     timestamps: false,
   }
 );
 
-module.exports = Data;
+module.exports = Users;

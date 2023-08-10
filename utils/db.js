@@ -1,6 +1,6 @@
 const Sequelize = require('sequelize');
 
-const sequelize = new Sequelize('openai','Cholah','Cholah@2104',{
+const sequelize = new Sequelize('school','Cholah','Cholah@2104',{
     host:'localhost',
     port:'3306',
     dialect:'mysql',
