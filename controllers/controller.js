@@ -1,6 +1,6 @@
 const openai = require("../openai/openai");
 const { extractPDFData, extractWebData } = require("./dataUtils");
-const { Data } = require('../models/Data');
+const Data = require("../models/Data");
 
 async function askQuestion(req, res) {
   try {
@@ -22,14 +22,20 @@ async function askQuestion(req, res) {
 
 async function saveExtractedDataToDB(type, source, extractedData) {
   try {
+    // Convert extractedData to string format if it's an object or an array
+    const extractedText =
+      Array.isArray(extractedData) || typeof extractedData === "object"
+        ? JSON.stringify(extractedData)
+        : extractedData;
+
     await Data.create({
       sourceType: type,
       sourceContent: source,
-      extractedText: extractedData,
+      extractedText: extractedText,
     });
   } catch (error) {
     console.error(error);
-    throw new Error('Error saving extracted data to the database');
+    throw new Error("Error saving extracted data to the database");
   }
 }
 
@@ -38,18 +44,18 @@ async function extractAndStoreData(req, res) {
     const { type, source } = req.body;
     let extractedData;
 
-    if (type === 'pdf') {
+    if (type === "pdf") {
       extractedData = await extractPDFData(source);
-    } else if (type === 'web') {
+    } else if (type === "web") {
       extractedData = await extractWebData(source);
     }
 
     await saveExtractedDataToDB(type, source, extractedData);
 
-    res.json({ message: 'Data extracted and stored successfully' });
+    res.json({ message: "Data extracted and stored successfully" });
   } catch (error) {
     console.error(error);
-    res.status(500).json({ error: 'Internal server error' });
+    res.status(500).json({ error: "Internal server error" });
   }
 }
 
