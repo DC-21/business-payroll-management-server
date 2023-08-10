@@ -85,6 +85,21 @@ async function cleaners(req, res) {
   }
 }
 
+async function finances(req,res){
+  try{
+    const{year,month,balance}=req.body;
+    const newFinances=await Finance.create({
+      year:year,
+      month:month,
+      balance:balance,
+    })
+    res.json({message:"new balance added"});
+  }catch(error){
+    console.error(error);
+    res.status(500).json({error:"internal server error"});
+  }
+}
+
 async function login(req, res) {
   try {
     const { email, password } = req.body;
@@ -152,4 +167,4 @@ async function deleteUser(req, res) {
   }
 }
 
-module.exports = { signUp, login, updatePassword, deleteUser, management, it, cleaners };
+module.exports = { signUp, login, updatePassword, deleteUser, management, it, cleaners, finances };
