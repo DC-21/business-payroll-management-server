@@ -10,11 +10,19 @@ async function extractPDFData(pdfUrl) {
 }
 
 async function extractWebData(url) {
-  const response = await axios.get(url);
-  const $ = cheerio.load(response.data);
-  // Use cheerio to extract data from the webpage
-  // Example: const extractedData = $('selector').text();
-  return extractedData;
+  try {
+    const response = await axios.get(url);
+    const $ = cheerio.load(response.data);
+    const extractedData = [];
+    $('p').each((index, element) => {
+      extractedData.push($(element).text());
+    });
+
+    return extractedData;
+  } catch (error) {
+    console.error('Error extracting web data:', error);
+    throw error;
+  }
 }
 
 module.exports = { extractPDFData, extractWebData };

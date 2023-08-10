@@ -1,6 +1,6 @@
-const openai = require('../openai/openai');
-const { extractPDFData, extractWebData } = require('./dataUtils');
-const { saveResponseToDB, saveExtractedDataToDB } = require('../utils/db');
+const openai = require("../openai/openai");
+const { extractPDFData, extractWebData } = require("./dataUtils");
+const { Data } = require('../models/Data');
 
 async function askQuestion(req, res) {
   try {
@@ -16,7 +16,20 @@ async function askQuestion(req, res) {
     res.json({ response: generatedResponse });
   } catch (error) {
     console.error(error);
-    res.status(500).json({ error: 'Internal server error' });
+    res.status(500).json({ error: "Internal server error" });
+  }
+}
+
+async function saveExtractedDataToDB(type, source, extractedData) {
+  try {
+    await Data.create({
+      sourceType: type,
+      sourceContent: source,
+      extractedText: extractedData,
+    });
+  } catch (error) {
+    console.error(error);
+    throw new Error('Error saving extracted data to the database');
   }
 }
 
@@ -31,7 +44,7 @@ async function extractAndStoreData(req, res) {
       extractedData = await extractWebData(source);
     }
 
-    await saveExtractedDataToDB(extractedData);
+    await saveExtractedDataToDB(type, source, extractedData);
 
     res.json({ message: 'Data extracted and stored successfully' });
   } catch (error) {
@@ -41,13 +54,13 @@ async function extractAndStoreData(req, res) {
 }
 
 async function getResponses(req, res) {
-    try {
-      const responses = await getResponsesFromDB();
-      res.json({ responses });
-    } catch (error) {
-      console.error(error);
-      res.status(500).json({ error: 'Internal server error' });
-    }
+  try {
+    const responses = await getResponsesFromDB();
+    res.json({ responses });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Internal server error" });
   }
+}
 
 module.exports = { askQuestion, extractAndStoreData, getResponses };
