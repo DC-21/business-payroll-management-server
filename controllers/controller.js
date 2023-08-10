@@ -31,58 +31,58 @@ async function signUp(req, res) {
   }
 }
 
-async function management(req,res){
-  try{
-    const{name,position,email,phone,nrc,salary}=req.body;
+async function management(req, res) {
+  try {
+    const { name, position, email, phone, nrc, salary } = req.body;
     const newManager = await Management.create({
-      name:name,
-      position:position,
-      email:email,
-      phone:phone,
-      nrc:nrc,
-      salary:salary,
+      name: name,
+      position: position,
+      email: email,
+      phone: phone,
+      nrc: nrc,
+      salary: salary,
     });
-    res.json({message:"manager successfully created"});
-  }catch(error){
+    res.json({ message: "manager successfully created" });
+  } catch (error) {
     console.error(error);
-    res.status(500).json({error:"internal server error"});
+    res.status(500).json({ error: "internal server error" });
   }
 }
 
-async function it(req,res){
-  try{
-    const{name,position,email,phone,nrc,salary}=req.body;
+async function it(req, res) {
+  try {
+    const { name, position, email, phone, nrc, salary } = req.body;
     const newIt = await IT.create({
-      name:name,
-      position:position,
-      email:email,
-      phone:phone,
-      nrc:nrc,
-      salary:salary,
+      name: name,
+      position: position,
+      email: email,
+      phone: phone,
+      nrc: nrc,
+      salary: salary,
     });
-    res.json({message:"IT personnel created successfully"});
-  }catch(error){
+    res.json({ message: "IT personnel created successfully" });
+  } catch (error) {
     console.error(error);
-    res.status(500).json({error:"internal server error"});
+    res.status(500).json({ error: "internal server error" });
   }
 }
 
-async function cleaners(req,res){
-  try{
-  const{name,position,email,phone,nrc,salary}=req.body;
-  const newCleaner = await Cleaners.create({
-    name:name,
-    position:position,
-    email:email,
-    phone:phone,
-    nrc:nrc,
-    salary:salary,
-  });
-  res.json({message:"new cleaner created successfully"});
-}catch(error){
-  console.error(error);
-  res.status(500).json({error:"internal server error"});
-}
+async function cleaners(req, res) {
+  try {
+    const { name, position, email, phone, nrc, salary } = req.body;
+    const newCleaner = await Cleaners.create({
+      name: name,
+      position: position,
+      email: email,
+      phone: phone,
+      nrc: nrc,
+      salary: salary,
+    });
+    res.json({ message: "new cleaner created successfully" });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "internal server error" });
+  }
 }
 
 async function login(req, res) {
@@ -100,7 +100,9 @@ async function login(req, res) {
     }
 
     // Generate a JWT token
-    const token = jwt.sign({ userId: user.id }, jwtSecretKey, { expiresIn: "2h" });
+    const token = jwt.sign({ userId: user.id }, jwtSecretKey, {
+      expiresIn: "2h",
+    });
 
     res.json({ token: token });
   } catch (error) {
@@ -108,7 +110,6 @@ async function login(req, res) {
     res.status(500).json({ error: "Internal server error" });
   }
 }
-
 
 async function updatePassword(req, res) {
   try {
@@ -151,4 +152,4 @@ async function deleteUser(req, res) {
   }
 }
 
-module.exports = { signUp, login, updatePassword, deleteUser, management, it };
+module.exports = { signUp, login, updatePassword, deleteUser, management, it, cleaners };
