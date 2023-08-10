@@ -1,66 +1,17 @@
-const { Configuration, OpenAIApi } = require("openai");
 const { extractPDFData, extractWebData } = require("./dataUtils");
 const Data = require("../models/Data");
+const langchain = require("langchain");
 const axios = require("axios");
 
-const apiKey = "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";
-
-const configuration = new Configuration({
-  apiKey: apiKey,
-});
-const openai = new OpenAIApi(configuration);
-
-async function askQuestion(req, res) {
-  try {
-    const userQuestion = req.body.question; // Extract the user's question
-
-    // Fetch relevant data from your database based on the user's question
-    const relevantDataFromDB = await fetchRelevantDataFromDB(userQuestion);
-
-    // Use the relevant data as a prompt for OpenAI API
-    const openaiResponse = await openai.createCompletion({
-      model: "text-davinci-003",
-      prompt: relevantDataFromDB,
-      temperature: 1,
-      max_tokens: 256,
-      top_p: 1,
-      frequency_penalty: 0,
-      presence_penalty: 0,
-    });
-
-    const generatedResponse = openaiResponse.data.choices[0].text.trim();
-
-    res.json({ response: generatedResponse });
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ error: "Internal server error" });
+const model = langchain.loadModel("my_model");
+async function askQuestion(question) {
+    const response = await model.generate(question);
+    return response;
   }
-}
-
-async function fetchRelevantDataFromDB(userQuestion) {
-  try {
-    // Fetch all entries from the database
-    const allData = await Data.findAll();
-    console.log(allData);
-
-    // Iterate through each entry and check if the user's question is relevant
-    const relevantData = [];
-    for (const entry of allData) {
-      const extractedText = entry.extractedText;
-      if (extractedText.includes(userQuestion)) {
-        relevantData.push(extractedText);
-      }
-    }
-
-    // Combine relevant data into a single string
-    const combinedRelevantData = relevantData.join("\n");
-
-    return combinedRelevantData;
-  } catch (error) {
-    console.error(error);
-    throw new Error("Error fetching relevant data from the database");
-  }
-}
+  const question = "What is the auth";
+  async function answer(){const response = await askQuestion(question);
+  
+  console.log(response);  }
 
 async function saveExtractedDataToDB(
   type,
@@ -109,14 +60,4 @@ async function extractAndStoreData(req, res) {
   }
 }
 
-async function getResponses(req, res) {
-  try {
-    const responses = await getResponsesFromDB();
-    res.json({ responses });
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ error: "Internal server error" });
-  }
-}
-
-module.exports = { askQuestion, extractAndStoreData, getResponses };
+module.exports = { extractAndStoreData};

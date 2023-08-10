@@ -1,6 +1,8 @@
 const express = require('express');
 const cors = require('cors');
 const Sequelize = require('./utils/db.js');
+const langchain = require("langchain");
+const Data = require("./models/Data.js");
 
 const app = express();
 app.use(express.json());
@@ -12,6 +14,25 @@ app.use((err, red, res, next)=>{
     const message = err.message;
     res.status(status).json({ message: message });
 });
+
+async function train() {
+    const data = await Data.findAll({
+      where: {
+        extractedText: {
+          isNotNull: true,
+        },
+      },
+    });
+  
+    const model = langchain.train("my_model", {
+      data: data.map((d) => d.extractedText),
+    });
+  
+    console.log("Model trained successfully!");
+  }
+
+console.log("Model trained successfully!");
+
 
 Sequelize.sync().then(()=>{
     console.log("database connected");
