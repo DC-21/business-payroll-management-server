@@ -67,6 +67,24 @@ async function it(req,res){
   }
 }
 
+async function cleaners(req,res){
+  try{
+  const{name,position,email,phone,nrc,salary}=req.body;
+  const newCleaner = await Cleaners.create({
+    name:name,
+    position:position,
+    email:email,
+    phone:phone,
+    nrc:nrc,
+    salary:salary,
+  });
+  res.json({message:"new cleaner created successfully"});
+}catch(error){
+  console.error(error);
+  res.status(500).json({error:"internal server error"});
+}
+}
+
 async function login(req, res) {
   try {
     const { email, password } = req.body;
