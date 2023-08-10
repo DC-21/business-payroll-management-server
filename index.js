@@ -15,9 +15,6 @@ app.use((err, red, res, next) => {
   res.status(status).json({ message: message });
 });
 
-
-console.log("Model trained successfully!");
-
 Sequelize.sync()
   .then(() => {
     console.log("database connected");
