@@ -21,6 +21,14 @@ const Data = sequelize.define(
       type: DataTypes.TEXT,
       allowNull: true,
     },
+    questionsAsked: {
+      type: DataTypes.TEXT,
+      allowNull: true,
+    },
+    responses: {
+      type: DataTypes.TEXT,
+      allowNull: true,
+    },
   },
   {
     timestamps: false,
