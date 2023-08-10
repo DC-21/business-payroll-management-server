@@ -2,16 +2,6 @@ const { extractPDFData, extractWebData } = require("./dataUtils");
 const Data = require("../models/Data");;
 const axios = require("axios");
 
-const model = langchain.loadModel("my_model");
-async function askQuestion(question) {
-    const response = await model.generate(question);
-    return response;
-  }
-  const question = "What is the auth";
-  async function answer(){const response = await askQuestion(question);
-  
-  console.log(response);  }
-
 async function saveExtractedDataToDB(
   type,
   source,
