@@ -31,7 +31,11 @@ const Management = sequelize.define("Management",{
     salary:{
         type:DataTypes.DECIMAL(10,2),
         allowNull:false,
-    },
+    }
+    ,account_no: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+      },
 },{
     timestamps:false,
 });

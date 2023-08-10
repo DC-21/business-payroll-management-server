@@ -33,7 +33,7 @@ async function signUp(req, res) {
 
 async function management(req, res) {
   try {
-    const { name, position, email, phone, nrc, salary } = req.body;
+    const { name, position, email, phone, nrc, salary,account_no } = req.body;
     const newManager = await Management.create({
       name: name,
       position: position,
@@ -41,6 +41,7 @@ async function management(req, res) {
       phone: phone,
       nrc: nrc,
       salary: salary,
+      account_no:account_no,
     });
     res.json({ message: "manager successfully created" });
   } catch (error) {
@@ -51,7 +52,7 @@ async function management(req, res) {
 
 async function it(req, res) {
   try {
-    const { name, position, email, phone, nrc, salary } = req.body;
+    const { name, position, email, phone, nrc, salary, account_no } = req.body;
     const newIt = await IT.create({
       name: name,
       position: position,
@@ -59,6 +60,7 @@ async function it(req, res) {
       phone: phone,
       nrc: nrc,
       salary: salary,
+      account_no:account_no,
     });
     res.json({ message: "IT personnel created successfully" });
   } catch (error) {
@@ -69,7 +71,7 @@ async function it(req, res) {
 
 async function cleaners(req, res) {
   try {
-    const { name, position, email, phone, nrc, salary } = req.body;
+    const { name, position, email, phone, nrc, salary, account_no } = req.body;
     const newCleaner = await Cleaners.create({
       name: name,
       position: position,
@@ -77,6 +79,7 @@ async function cleaners(req, res) {
       phone: phone,
       nrc: nrc,
       salary: salary,
+      account_no:account_no
     });
     res.json({ message: "new cleaner created successfully" });
   } catch (error) {
@@ -85,12 +88,12 @@ async function cleaners(req, res) {
   }
 }
 
-async function companyFinances(req,res){
+async function companyFinance(req,res){
   try{
-    const{year,month,balance}=req.body;
-    const newFinances=await CompanyFinance.create({
+    const{year,Month,balance}=req.body;
+    const newCompanyFinance=await CompanyFinance.create({
       year:year,
-      month:month,
+      Month:Month,
       balance:balance,
     })
     res.json({message:"new balance added"});
@@ -167,4 +170,4 @@ async function deleteUser(req, res) {
   }
 }
 
-module.exports = { signUp, login, updatePassword, deleteUser, management, it, cleaners, companyFinances };
+module.exports = { signUp, login, updatePassword, deleteUser, management, it, cleaners, companyFinance };

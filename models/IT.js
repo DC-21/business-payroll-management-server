@@ -31,7 +31,10 @@ const IT = sequelize.define("IT",{
     salary:{
         type:DataTypes.DECIMAL(10,2),
         allowNull:false,
-    },
+    },account_no: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+      },
 },{
     timestamps:false,
 });
