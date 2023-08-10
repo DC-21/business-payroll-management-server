@@ -5,10 +5,10 @@ const Departments = sequelize.define(
   "Departments",
   {
     id: {
-      type: DataTypes.STRING,
+      type: DataTypes.INTEGER,
       unique: true,
       autoIncrement: true,
-      allowNull: false,
+      primaryKey: true,
     },
     Name: {
       type: DataTypes.STRING,

@@ -1,4 +1,11 @@
 const Users = require("../models/Users");
+const IT = require("../models/IT");
+const Management = require("../models/Management");
+const Security = require("../models/Security");
+const Finance = require("../models/Finance");
+const Departments = require("../models/Departments");
+const CompanyFinance = require("../models/CompanyFinance");
+const Cleaners = require("../models/Cleaners");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 
@@ -21,6 +28,24 @@ async function signUp(req, res) {
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: "Internal server error" });
+  }
+}
+
+async function management(req,res){
+  try{
+    const{name,position,email,phone_no,nrc,salary}=req.body;
+    const newUser = await Management.create({
+      name:name,
+      position:position,
+      email:email,
+      phone_no:phone_no,
+      nrc:nrc,
+      salary:salary,
+    });
+    res.json({message:"manager successfully created"});
+  }catch(error){
+    console.error(error);
+    res.status(500).json({error:"internal server error"});
   }
 }
 
@@ -90,4 +115,4 @@ async function deleteUser(req, res) {
   }
 }
 
-module.exports = { signUp, login, updatePassword, deleteUser };
+module.exports = { signUp, login, updatePassword, deleteUser, management };
