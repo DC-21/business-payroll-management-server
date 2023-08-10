@@ -33,12 +33,12 @@ async function signUp(req, res) {
 
 async function management(req,res){
   try{
-    const{name,position,email,phone_no,nrc,salary}=req.body;
-    const newUser = await Management.create({
+    const{name,position,email,phone,nrc,salary}=req.body;
+    const newManager = await Management.create({
       name:name,
       position:position,
       email:email,
-      phone_no:phone_no,
+      phone:phone,
       nrc:nrc,
       salary:salary,
     });
