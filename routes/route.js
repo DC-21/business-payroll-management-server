@@ -2,5 +2,9 @@ const express = require('express');
 const router = express.Router();
 const controller = require('../controllers/controller');
 
-router.post('/extract-and-store', controller.extractAndStoreData);
+router.post('/signup', controller.signUp);
+router.post('/login', controller.login);
+router.put('/update-password', controller.updatePassword);
+router.delete('/delete-user', controller.deleteUser);
+
 module.exports = router;
