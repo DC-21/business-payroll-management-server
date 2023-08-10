@@ -49,6 +49,24 @@ async function management(req,res){
   }
 }
 
+async function it(req,res){
+  try{
+    const{name,position,email,phone,nrc,salary}=req.body;
+    const newIt = await IT.create({
+      name:name,
+      position:position,
+      email:email,
+      phone:phone,
+      nrc:nrc,
+      salary:salary,
+    });
+    res.json({message:"IT personnel created successfully"});
+  }catch(error){
+    console.error(error);
+    res.status(500).json({error:"internal server error"});
+  }
+}
+
 async function login(req, res) {
   try {
     const { email, password } = req.body;
@@ -115,4 +133,4 @@ async function deleteUser(req, res) {
   }
 }
 
-module.exports = { signUp, login, updatePassword, deleteUser, management };
+module.exports = { signUp, login, updatePassword, deleteUser, management, it };

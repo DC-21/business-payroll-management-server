@@ -8,5 +8,6 @@ router.put('/update-password', controller.updatePassword);
 router.delete('/delete-user', controller.deleteUser);
 
 router.post('/management', controller.management);
+router.post('/it', controller.it);
 
 module.exports = router;
