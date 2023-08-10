@@ -1,8 +1,6 @@
 const express = require("express");
 const cors = require("cors");
 const Sequelize = require("./utils/db.js");
-const langchain = require("langchain");
-const Data = require("./models/Data.js");
 
 const app = express();
 app.use(express.json());
