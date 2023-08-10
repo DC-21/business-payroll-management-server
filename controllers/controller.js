@@ -1,6 +1,5 @@
 const { extractPDFData, extractWebData } = require("./dataUtils");
-const Data = require("../models/Data");
-const langchain = require("langchain");
+const Data = require("../models/Data");;
 const axios = require("axios");
 
 const model = langchain.loadModel("my_model");
