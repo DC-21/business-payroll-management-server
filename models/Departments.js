@@ -2,7 +2,7 @@ const sequelize = require("../utils/db");
 const { DataTypes } = require("sequelize");
 
 const Departments = sequelize.define(
-  "Employees",
+  "Departments",
   {
     id: {
       type: DataTypes.STRING,
