@@ -10,6 +10,6 @@ router.delete('/delete-user', controller.deleteUser);
 router.post('/management', controller.management);
 router.post('/it', controller.it);
 router.post('/cleaners', controller.cleaners);
-router.post('/finances', controller.finances);
+router.post('/company-finances', controller.companyFinance);
 
 module.exports = router;

@@ -85,10 +85,10 @@ async function cleaners(req, res) {
   }
 }
 
-async function finances(req,res){
+async function companyFinances(req,res){
   try{
     const{year,month,balance}=req.body;
-    const newFinances=await Finance.create({
+    const newFinances=await CompanyFinance.create({
       year:year,
       month:month,
       balance:balance,
@@ -167,4 +167,4 @@ async function deleteUser(req, res) {
   }
 }
 
-module.exports = { signUp, login, updatePassword, deleteUser, management, it, cleaners, finances };
+module.exports = { signUp, login, updatePassword, deleteUser, management, it, cleaners, companyFinances };
