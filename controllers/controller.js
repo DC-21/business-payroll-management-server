@@ -222,4 +222,4 @@ async function deleteUser(req, res) {
   }
 }
 
-module.exports = { signUp, login, updatePassword, deleteUser, management, it, cleaners, companyFinance, security, departments };
+module.exports = { signUp, login, updatePassword, deleteUser, management, it, cleaners, companyFinance, security, departments, finance };
