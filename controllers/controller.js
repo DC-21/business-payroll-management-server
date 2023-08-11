@@ -122,7 +122,21 @@ async function finance(req,res){
     res.json({message:"new finance added successfully"});
   }catch(error){
     console.error(error);
-    res.status(500).json({error:"internal server error"})
+    res.status(500).json({error:"internal server error"});
+  }
+}
+
+async function departments(req,res){
+  try{
+    const{Name,Number_of_employees}=req.body;
+    const newDepartment = await Departments.create({
+      Name:Name,
+      Number_of_employees:Number_of_employees,
+    })
+    res.json({message:"new department added successfully"});
+  }catch(error){
+    console.error(error);
+    res.status(500).json({error:"internal server error"});
   }
 }
 
@@ -208,4 +222,4 @@ async function deleteUser(req, res) {
   }
 }
 
-module.exports = { signUp, login, updatePassword, deleteUser, management, it, cleaners, companyFinance, security };
+module.exports = { signUp, login, updatePassword, deleteUser, management, it, cleaners, companyFinance, security, departments };
