@@ -140,6 +140,18 @@ async function departments(req,res){
   }
 }
 
+async function getDepartments(req, res) {
+  try {
+    const allDepartments = await Departments.findAll();
+
+    res.json({ departments: allDepartments });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Internal server error" });
+  }
+}
+
+
 async function companyFinance(req,res){
   try{
     const{year,Month,balance}=req.body;
@@ -149,6 +161,16 @@ async function companyFinance(req,res){
       balance:balance,
     })
     res.json({message:"new balance added"});
+  }catch(error){
+    console.error(error);
+    res.status(500).json({error:"internal server error"});
+  }
+}
+
+async function getCompanyFinance(req,res){
+  try{
+    const allCompanyFinance = await CompanyFinance.findAll();
+    res.json({companyFinance:allCompanyFinance});
   }catch(error){
     console.error(error);
     res.status(500).json({error:"internal server error"});
@@ -222,4 +244,4 @@ async function deleteUser(req, res) {
   }
 }
 
-module.exports = { signUp, login, updatePassword, deleteUser, management, it, cleaners, companyFinance, security, departments, finance };
+module.exports = { signUp, login, updatePassword, deleteUser, management, it, cleaners, companyFinance,getCompanyFinance, security, departments,getDepartments, finance };

@@ -12,7 +12,9 @@ router.post('/it', controller.it);
 router.post('/cleaners', controller.cleaners);
 router.post('/security', controller.security);
 router.post('/finance', controller.finance);
-router.post('/department',controller.departments)
+router.post('/department',controller.departments);
+router.get('/department',controller.getDepartments);
 router.post('/company-finances', controller.companyFinance);
+router.get('/company-finances',controller.getCompanyFinance);
 
 module.exports = router;
