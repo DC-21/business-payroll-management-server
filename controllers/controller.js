@@ -126,6 +126,16 @@ async function finance(req,res){
   }
 }
 
+async function getFinance(req,res){
+  try{
+    const allFinance = await Finance.findAll();
+    res.json({finance:allFinance});
+  }catch(error){
+    console.error(error);
+    res.status(500).json({error:"internal server error"});
+  }
+}
+
 async function departments(req,res){
   try{
     const{Name,Number_of_employees}=req.body;
@@ -244,4 +254,4 @@ async function deleteUser(req, res) {
   }
 }
 
-module.exports = { signUp, login, updatePassword, deleteUser, management, it, cleaners, companyFinance,getCompanyFinance, security, departments,getDepartments, finance };
+module.exports = { signUp, login, updatePassword, deleteUser, management, it, cleaners, companyFinance,getCompanyFinance, security, departments,getDepartments, finance, getFinance };
