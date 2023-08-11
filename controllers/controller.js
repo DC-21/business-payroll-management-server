@@ -69,6 +69,16 @@ async function it(req, res) {
   }
 }
 
+async function getIt(req,res){
+  try{
+    const allIT = await IT.findAll();
+    res.json({it:allIT});
+  }catch(error){
+    console.error(error);
+    res.status(500).json({error:"internal server error"});
+  }
+}
+
 async function cleaners(req, res) {
   try {
     const { name, position, email, phone, nrc, salary, account_no } = req.body;
