@@ -88,6 +88,44 @@ async function cleaners(req, res) {
   }
 }
 
+async function security(req,res){
+  try{
+    const {name,position,email,phone,nrc,salary,account_no}=req.body;
+    const newSecurity=await Security.create({
+      name:name,
+      position:position,
+      email:email,
+      phone:phone,
+      nrc:nrc,
+      salary:salary,
+      account_no:account_no
+    });
+    res.json({message:"new security created successfully"});
+  }catch(error){
+    console.error(error);
+    res.status(500).json({error:"internal server error"})
+  }
+}
+
+async function finance(req,res){
+  try{
+    const{name,position,email,phone,nrc,salary,account_no}=req.body;
+    const newFinance=await Finance.create({
+      name:name,
+      position:position,
+      email:email,
+      phone:phone,
+      salary:salary,
+      nrc:nrc,
+      account_no:account_no
+    });
+    res.json({message:"new finance added successfully"});
+  }catch(error){
+    console.error(error);
+    res.status(500).json({error:"internal server error"})
+  }
+}
+
 async function companyFinance(req,res){
   try{
     const{year,Month,balance}=req.body;
@@ -170,4 +208,4 @@ async function deleteUser(req, res) {
   }
 }
 
-module.exports = { signUp, login, updatePassword, deleteUser, management, it, cleaners, companyFinance };
+module.exports = { signUp, login, updatePassword, deleteUser, management, it, cleaners, companyFinance, security };
