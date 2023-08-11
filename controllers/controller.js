@@ -31,6 +31,16 @@ async function signUp(req, res) {
   }
 }
 
+async function getSignup(req,res){
+  try{
+    const allSignup = await Users.findAll();
+    res.json({signup:allSignup});
+  }catch(error){
+    console.error(error);
+    res.status(500).json({error:"internal server error"});
+  }
+}
+
 async function management(req, res) {
   try {
     const { name, position, email, phone, nrc, salary,account_no } = req.body;
