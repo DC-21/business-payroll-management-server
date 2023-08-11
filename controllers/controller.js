@@ -50,6 +50,16 @@ async function management(req, res) {
   }
 }
 
+async function getManagement(req,res){
+  try{
+  const allManagement = await Management.findAll();
+  res.json({management:allManagement});
+  }catch(error){
+    console.error(error);
+    res.status(5005).json({error:"internal server error"});
+  }
+}
+
 async function it(req, res) {
   try {
     const { name, position, email, phone, nrc, salary, account_no } = req.body;
@@ -284,4 +294,4 @@ async function deleteUser(req, res) {
   }
 }
 
-module.exports = { signUp, login, updatePassword, deleteUser, management, it, cleaners,getCleaners, companyFinance,getCompanyFinance, security,getSecurity, departments,getDepartments, finance, getFinance };
+module.exports = { signUp, login, updatePassword, deleteUser, management,getManagement, it,getIt, cleaners,getCleaners, companyFinance,getCompanyFinance, security,getSecurity, departments,getDepartments, finance, getFinance };
