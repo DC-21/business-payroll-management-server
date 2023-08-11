@@ -88,6 +88,16 @@ async function cleaners(req, res) {
   }
 }
 
+async function getCleaners(req,res){
+  try{
+  const allCleaners = await Cleaners.findAll();
+  res.json({cleaners:allCleaners});
+  }catch(error){
+    console.error(error);
+    res.status(500).json({error:"internal server error"});
+  }
+}
+
 async function security(req,res){
   try{
     const {name,position,email,phone,nrc,salary,account_no}=req.body;
@@ -264,4 +274,4 @@ async function deleteUser(req, res) {
   }
 }
 
-module.exports = { signUp, login, updatePassword, deleteUser, management, it, cleaners, companyFinance,getCompanyFinance, security,getSecurity, departments,getDepartments, finance, getFinance };
+module.exports = { signUp, login, updatePassword, deleteUser, management, it, cleaners,getCleaners, companyFinance,getCompanyFinance, security,getSecurity, departments,getDepartments, finance, getFinance };
