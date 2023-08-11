@@ -11,6 +11,7 @@ router.post('/management', controller.management);
 router.post('/it', controller.it);
 router.post('/cleaners', controller.cleaners);
 router.post('/security', controller.security);
+router.get('/security',controller.getSecurity);
 router.post('/finance', controller.finance);
 router.get('/finance',controller.getFinance);
 router.post('/department',controller.departments);
