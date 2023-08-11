@@ -304,4 +304,4 @@ async function deleteUser(req, res) {
   }
 }
 
-module.exports = { signUp, login, updatePassword, deleteUser, management,getManagement, it,getIt, cleaners,getCleaners, companyFinance,getCompanyFinance, security,getSecurity, departments,getDepartments, finance, getFinance };
+module.exports = { signUp,getSignup, login, updatePassword, deleteUser, management,getManagement, it,getIt, cleaners,getCleaners, companyFinance,getCompanyFinance, security,getSecurity, departments,getDepartments, finance, getFinance };
