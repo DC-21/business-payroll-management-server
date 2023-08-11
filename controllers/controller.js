@@ -107,6 +107,16 @@ async function security(req,res){
   }
 }
 
+async function getSecurity(req,res){
+  try{
+    const allSecurity = await Security.findAll();
+    res.json({security:allSecurity});
+  }catch(error){
+    console.error(error);
+    res.status(500).json({error:"internal server error"});
+  }
+}
+
 async function finance(req,res){
   try{
     const{name,position,email,phone,nrc,salary,account_no}=req.body;
@@ -254,4 +264,4 @@ async function deleteUser(req, res) {
   }
 }
 
-module.exports = { signUp, login, updatePassword, deleteUser, management, it, cleaners, companyFinance,getCompanyFinance, security, departments,getDepartments, finance, getFinance };
+module.exports = { signUp, login, updatePassword, deleteUser, management, it, cleaners, companyFinance,getCompanyFinance, security,getSecurity, departments,getDepartments, finance, getFinance };
